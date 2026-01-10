@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REGISTRASI MASUK</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;font-family:Poppins,sans-serif}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#0b1d36,#061428);
+  display:flex;
+  justify-content:center;
+  padding:16px
+}
+.container{
+  width:100%;
+  max-width:420px;
+  background:#0f2747;
+  padding:22px;
+  border-radius:14px;
+  color:#fff
+}
+h1{text-align:center;font-size:20px;margin:0}
+p{text-align:center;font-size:13px;color:#b7c6dc}
+.field{margin-bottom:14px}
+label{font-size:12px;color:#9fb2cc}
+input,select,textarea{
+  width:100%;
+  background:transparent;
+  border:none;
+  border-bottom:1px solid #4f6b8f;
+  padding:10px 4px;
+  color:#fff
+}
+button{
+  width:100%;
+  padding:14px;
+  margin-top:18px;
+  background:#2ecc71;
+  border:none;
+  border-radius:10px;
+  font-weight:600
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>REGISTRASI MASUK</h1>
+<p>Lengkapi data sebelum masuk area</p>
+
+<form onsubmit="sendData();return false;">
+<input id="nama" placeholder="Nama" required>
+<input id="perusahaan" placeholder="Perusahaan" required>
+<select id="kategori" required>
+<option value="">Kategori</option>
+<option>Kontraktor</option>
+<option>Visitor</option>
+</select>
+<input id="lokasi" placeholder="Lokasi Kerja" required>
+<textarea id="tujuan" placeholder="Tujuan" required></textarea>
+<input id="security" placeholder="Nama Security" required>
+<input id="pass" placeholder="Nomor Pass" required>
+<input id="datetime" readonly>
+<button>KIRIM VIA WHATSAPP</button>
+</form>
+</div>
+
+<script>
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyZwjVp56jUf_jkEKCA9-lgUHaotPQ_b5-TBpJhKHVilMkKODjiqAuB4WOnnKJ8MqLL/exec";
+
+document.getElementById("datetime").value =
+  new Date().toLocaleString("id-ID");
+
+async function sendData(){
+  const data={
+    nama:nama.value,
+    perusahaan:perusahaan.value,
+    kategori:kategori.value,
+    lokasi:lokasi.value,
+    tujuan:tujuan.value,
+    security:security.value,
+    pass:pass.value,
+    datetime:datetime.value
+  };
+
+  const res = await fetch(WEBAPP_URL,{
+    method:"POST",
+    body:JSON.stringify(data)
+  });
+
+  const r = await res.json();
+  if(r.status!=="success"){
+    alert("Gagal simpan");
+    return;
+  }
+
+  const msg =
+   `REGISTRASI MASUK%0A%0ANama: ${data.nama}%0APerusahaan: ${data.perusahaan}`;
+
+  window.open("https://wa.me/6281314414955?text="+msg,"_blank");
+}
+</script>
+
+</body>
+</html>
