@@ -243,32 +243,26 @@ button {
   </div>
 
 </div>
+  
 <script>
-/* ================================
-   KONFIGURASI
-================================ */
 const WEBAPP_URL =
 "https://script.google.com/macros/s/AKfycbyZwjVp56jUf_jkEKCA9-lgUHaotPQ_b5-TBpJhKHVilMkKODjiqAuB4WOnnKJ8MqLL/exec";
 
 let isSending = false;
 
-/* ================================
-   AUTO DATETIME
-================================ */
+/* AUTO DATETIME */
 const now = new Date();
-document.getElementById("datetime").value =
+datetime.value =
   now.toLocaleDateString("id-ID") + " " +
   now.toLocaleTimeString("id-ID", {
     hour: "2-digit",
     minute: "2-digit"
   });
 
-/* ================================
-   KIRIM DATA (FIX HP & LAPTOP)
-================================ */
-async function sendData() {
+function sendData() {
   if (isSending) return;
   isSending = true;
+  btnSubmit.disabled = true;
 
   const data = {
     nama: nama.value,
@@ -281,50 +275,44 @@ async function sendData() {
     datetime: datetime.value
   };
 
-  try {
-    /* ✅ STEP 1 — SIMPAN KE GOOGLE SHEET */
-    const res = await fetch(WEBAPP_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
+  /* 🔥 KIRIM KE GOOGLE SHEET (TANPA NUNGGU RESPONSE) */
+  fetch(WEBAPP_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: JSON.stringify(data)
+  });
 
-    const result = await res.json();
-    if (result.status !== "success") {
-      throw new Error("Gagal simpan");
-    }
+  /* ✅ LANGSUNG BUKA WHATSAPP (ANTI DELAY) */
+  const message =
+    "REGISTRASI MASUK%0A%0A" +
+    "Nama: " + data.nama + "%0A" +
+    "Perusahaan/Vendor: " + data.perusahaan + "%0A" +
+    "Kategori: " + data.kategori + "%0A" +
+    "Lokasi Kerja: " + data.lokasi + "%0A" +
+    "Tujuan: " + data.tujuan + "%0A" +
+    "Nama Security: " + data.security + "%0A" +
+    "Nomor Pass/Rompi: " + data.pass + "%0A" +
+    "Tanggal & Jam Masuk: " + data.datetime;
 
-    /* ✅ STEP 2 — BARU BUKA WHATSAPP */
-    const message =
-      "REGISTRASI MASUK%0A%0A" +
-      "Nama: " + data.nama + "%0A" +
-      "Perusahaan/Vendor: " + data.perusahaan + "%0A" +
-      "Kategori: " + data.kategori + "%0A" +
-      "Lokasi Kerja: " + data.lokasi + "%0A" +
-      "Tujuan: " + data.tujuan + "%0A" +
-      "Nama Security: " + data.security + "%0A" +
-      "Nomor Pass/Rompi: " + data.pass + "%0A" +
-      "Tanggal & Jam Masuk: " + data.datetime;
+  window.open(
+    "https://wa.me/6281314414955?text=" + message,
+    "_blank"
+  );
 
-    window.open(
-      "https://wa.me/6281314414955?text=" + message,
-      "_blank"
-    );
+  /* RESET FORM */
+  document.querySelector("form").reset();
 
-    document.querySelector("form").reset();
-
-  } catch (err) {
-    alert("Gagal menyimpan data");
-  } finally {
+  setTimeout(() => {
     isSending = false;
-  }
+    btnSubmit.disabled = false;
+  }, 1500);
 }
 </script>
 
+
 </body>
 </html>
+
 
 
 
