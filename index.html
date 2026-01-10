@@ -247,15 +247,16 @@ button {
 <script>
 const WEBAPP_URL =
 "https://script.google.com/macros/s/AKfycbyZwjVp56jUf_jkEKCA9-lgUHaotPQ_b5-TBpJhKHVilMkKODjiqAuB4WOnnKJ8MqLL/exec";
-/* AUTO DATE TIME */
+
+/* AUTO DATETIME */
 const now = new Date();
-document.getElementById("datetime").value =
+datetime.value =
   now.toLocaleDateString("id-ID") + " " +
   now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
 
 let isSending = false;
 
-async function sendData() {
+function sendData() {
   if (isSending) return;
   isSending = true;
 
@@ -270,43 +271,39 @@ async function sendData() {
     datetime: datetime.value
   };
 
-  try {
-    const res = await fetch(WEBAPP_URL, {
-      method: "POST",
-      body: JSON.stringify(data)
-    });
+  /* 1️⃣ OPEN WHATSAPP INSTANT */
+  const message =
+    "REGISTRASI MASUK%0A%0A" +
+    "Nama: " + data.nama + "%0A" +
+    "Perusahaan/Vendor: " + data.perusahaan + "%0A" +
+    "Kategori: " + data.kategori + "%0A" +
+    "Lokasi Kerja: " + data.lokasi + "%0A" +
+    "Tujuan: " + data.tujuan + "%0A" +
+    "Nama Security: " + data.security + "%0A" +
+    "Nomor Pass/Rompi: " + data.pass + "%0A" +
+    "Tanggal & Jam Masuk: " + data.datetime;
 
-    const result = await res.json();
-    if (result.status !== "success") throw "error";
+  window.open(
+    "https://wa.me/6281314414955?text=" + message,
+    "_blank"
+  );
 
-    const message =
-      "REGISTRASI MASUK%0A%0A" +
-      "Nama: " + data.nama + "%0A" +
-      "Perusahaan/Vendor: " + data.perusahaan + "%0A" +
-      "Kategori: " + data.kategori + "%0A" +
-      "Lokasi Kerja: " + data.lokasi + "%0A" +
-      "Tujuan: " + data.tujuan + "%0A" +
-      "Nama Security: " + data.security + "%0A" +
-      "Nomor Pass/Rompi: " + data.pass + "%0A" +
-      "Tanggal & Jam Masuk: " + data.datetime;
+  /* 2️⃣ SEND DATA TO SHEET (BACKGROUND) */
+  fetch(WEBAPP_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  }).catch(() => {});
 
-    window.open(
-      "https://wa.me/6281314414955?text=" + message,
-      "_blank"
-    );
-
-    document.querySelector("form").reset();
-
-  } catch (e) {
-    alert("Gagal menyimpan data");
-  } finally {
-    isSending = false;
-  }
+  document.querySelector("form").reset();
+  isSending = false;
 }
 </script>
 
+
 </body>
 </html>
+
 
 
 
