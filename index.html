@@ -243,20 +243,30 @@ button {
   </div>
 
 </div>
-
 <script>
+/* ================================
+   KONFIGURASI
+================================ */
 const WEBAPP_URL =
 "https://script.google.com/macros/s/AKfycbyZwjVp56jUf_jkEKCA9-lgUHaotPQ_b5-TBpJhKHVilMkKODjiqAuB4WOnnKJ8MqLL/exec";
 
-/* AUTO DATETIME */
-const now = new Date();
-datetime.value =
-  now.toLocaleDateString("id-ID") + " " +
-  now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
-
 let isSending = false;
 
-function sendData() {
+/* ================================
+   AUTO DATETIME
+================================ */
+const now = new Date();
+document.getElementById("datetime").value =
+  now.toLocaleDateString("id-ID") + " " +
+  now.toLocaleTimeString("id-ID", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+/* ================================
+   KIRIM DATA (FIX HP & LAPTOP)
+================================ */
+async function sendData() {
   if (isSending) return;
   isSending = true;
 
@@ -271,38 +281,51 @@ function sendData() {
     datetime: datetime.value
   };
 
-  /* 1️⃣ OPEN WHATSAPP INSTANT */
-  const message =
-    "REGISTRASI MASUK%0A%0A" +
-    "Nama: " + data.nama + "%0A" +
-    "Perusahaan/Vendor: " + data.perusahaan + "%0A" +
-    "Kategori: " + data.kategori + "%0A" +
-    "Lokasi Kerja: " + data.lokasi + "%0A" +
-    "Tujuan: " + data.tujuan + "%0A" +
-    "Nama Security: " + data.security + "%0A" +
-    "Nomor Pass/Rompi: " + data.pass + "%0A" +
-    "Tanggal & Jam Masuk: " + data.datetime;
+  try {
+    /* ✅ STEP 1 — SIMPAN KE GOOGLE SHEET */
+    const res = await fetch(WEBAPP_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
 
-  window.open(
-    "https://wa.me/6281314414955?text=" + message,
-    "_blank"
-  );
+    const result = await res.json();
+    if (result.status !== "success") {
+      throw new Error("Gagal simpan");
+    }
 
-  /* 2️⃣ SEND DATA TO SHEET (BACKGROUND) */
-  fetch(WEBAPP_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  }).catch(() => {});
+    /* ✅ STEP 2 — BARU BUKA WHATSAPP */
+    const message =
+      "REGISTRASI MASUK%0A%0A" +
+      "Nama: " + data.nama + "%0A" +
+      "Perusahaan/Vendor: " + data.perusahaan + "%0A" +
+      "Kategori: " + data.kategori + "%0A" +
+      "Lokasi Kerja: " + data.lokasi + "%0A" +
+      "Tujuan: " + data.tujuan + "%0A" +
+      "Nama Security: " + data.security + "%0A" +
+      "Nomor Pass/Rompi: " + data.pass + "%0A" +
+      "Tanggal & Jam Masuk: " + data.datetime;
 
-  document.querySelector("form").reset();
-  isSending = false;
+    window.open(
+      "https://wa.me/6281314414955?text=" + message,
+      "_blank"
+    );
+
+    document.querySelector("form").reset();
+
+  } catch (err) {
+    alert("Gagal menyimpan data");
+  } finally {
+    isSending = false;
+  }
 }
 </script>
 
-
 </body>
 </html>
+
 
 
 
