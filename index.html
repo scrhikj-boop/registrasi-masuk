@@ -269,6 +269,27 @@ function sendData() {
   isSending = true;
   btnSubmit.disabled = true;
 
+  /* 1️⃣ SIAPKAN MESSAGE DULU */
+  const message =
+`REGISTRASI MASUK
+
+Nama: ${nama.value}
+No Handphone: ${phone.value}
+Perusahaan/Vendor: ${perusahaan.value}
+Kategori: ${kategori.value}
+Lokasi Kerja: ${lokasi.value}
+Tujuan: ${tujuan.value}
+Nama Security: ${security.value}
+Nomor Pass/Rompi: ${pass.value}
+Tanggal & Jam Masuk: ${datetime.value}`;
+
+  /* 2️⃣ BUKA WHATSAPP (HARUS PERTAMA!) */
+  window.open(
+    "https://wa.me/6281314414955?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+
+  /* 3️⃣ KIRIM KE GOOGLE SHEET (BACKGROUND) */
   const formData = new URLSearchParams();
   formData.append("nama", nama.value);
   formData.append("phone", phone.value);
@@ -282,26 +303,11 @@ function sendData() {
 
   fetch(WEBAPP_URL, {
     method: "POST",
-    body: formData
+    body: formData,
+    mode: "no-cors"
   });
 
-  const message =
-    "REGISTRASI MASUK%0A%0A" +
-    "Nama: " + nama.value + "%0A" +
-    "No Handphone: " + phone.value + "%0A" +
-    "Perusahaan/Vendor: " + perusahaan.value + "%0A" +
-    "Kategori: " + kategori.value + "%0A" +
-    "Lokasi Kerja: " + lokasi.value + "%0A" +
-    "Tujuan: " + tujuan.value + "%0A" +
-    "Nama Security: " + security.value + "%0A" +
-    "Nomor Pass/Rompi: " + pass.value + "%0A" +
-    "Tanggal & Jam Masuk: " + datetime.value;
-
-  window.open(
-    "https://wa.me/6281314414955?text=" + message,
-    "_blank"
-  );
-
+  /* 4️⃣ RESET */
   document.querySelector("form").reset();
 
   setTimeout(() => {
@@ -309,13 +315,12 @@ function sendData() {
     btnSubmit.disabled = false;
   }, 1500);
 }
-
-  
 </script>
 
 
 </body>
 </html>
+
 
 
 
