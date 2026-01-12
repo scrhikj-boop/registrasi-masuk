@@ -8,149 +8,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
+* { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 body {
-  margin: 0;
-  min-height: 100vh;
+  margin: 0; min-height: 100vh;
   background: linear-gradient(180deg,#0f1c2e 0%,#132640 60%,#0f1c2e 100%);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  display: flex; justify-content: center; align-items: flex-start;
   padding: 24px 12px;
 }
-
 .form-card {
-  width: 100%;
-  max-width: 520px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: rgba(19, 38, 64, 0.55);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
-  color: #ffffff;
+  width: 100%; max-width: 520px; border-radius: 16px; overflow: hidden;
+  background: rgba(19, 38, 64, 0.55); backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45); color: #ffffff;
 }
-
-.form-header {
-  padding: 22px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-}
-
-.form-header h1 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.form-header p {
-  margin-top: 6px;
-  font-size: 12.5px;
-  opacity: 0.85;
-  line-height: 1.4;
-}
-
-.form-body {
-  padding: 22px 20px;
-}
-
-.field {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  font-size: 12.5px;
-  font-weight: 500;
-  margin-bottom: 6px;
-}
-
+.form-header { padding: 22px 20px; border-bottom: 1px solid rgba(255,255,255,0.12); }
+.form-header h1 { margin: 0; font-size: 20px; font-weight: 500; }
+.form-header p { margin-top: 6px; font-size: 12.5px; opacity: 0.85; line-height: 1.4; }
+.form-body { padding: 22px 20px; }
+.field { margin-bottom: 20px; }
+label { display: block; font-size: 12.5px; font-weight: 500; margin-bottom: 6px; }
 input, select, textarea {
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid rgba(255,255,255,0.4);
-  padding: 12px 6px;
-  font-size: 14px;
-  background: transparent;
-  color: #ffffff;
-  outline: none;
+  width: 100%; border: none; border-bottom: 2px solid rgba(255,255,255,0.4);
+  padding: 12px 6px; font-size: 14px;
+  background: transparent; color: #ffffff; outline: none;
 }
-
-input[readonly] {
-  opacity: 0.8;
-}
-
-textarea {
-  resize: none;
-  min-height: 90px;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  border-bottom-color: #25D366;
-}
-
-select option {
-  color: #000;
-}
-
+input[readonly] { opacity: 0.8; }
+textarea { resize: none; min-height: 90px; }
+input:focus, select:focus, textarea:focus { border-bottom-color: #25D366; }
+select option { color: #000; }
 button {
-  width: 100%;
-  padding: 15px;
-  border: none;
-  border-radius: 14px;
-  background: #25D366;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
+  width: 100%; padding: 15px; border: none; border-radius: 14px;
+  background: #25D366; color: #ffffff;
+  font-size: 15px; font-weight: 600; cursor: pointer;
 }
-
 .form-footer {
-  text-align: center;
-  font-size: 11px;
-  opacity: 0.6;
-  padding: 14px;
-  border-top: 1px solid rgba(255,255,255,0.12);
-}
-
-@media (max-width: 480px) {
-  body {
-    padding: 16px 10px;
-  }
-
-  .form-card {
-    border-radius: 14px;
-  }
-
-  .form-header h1 {
-    font-size: 18px;
-  }
-
-  .form-header p {
-    font-size: 12px;
-  }
-
-  .form-body {
-    padding: 18px 16px;
-  }
-
-  label {
-    font-size: 12px;
-  }
-
-  input, select, textarea {
-    font-size: 14px;
-    padding: 12px 4px;
-  }
-
-  button {
-    font-size: 14px;
-    padding: 14px;
-  }
+  text-align: center; font-size: 11px; opacity: 0.6;
+  padding: 14px; border-top: 1px solid rgba(255,255,255,0.12);
 }
 </style>
 </head>
@@ -158,7 +50,6 @@ button {
 <body>
 
 <div class="form-card">
-
   <div class="form-header">
     <h1>REGISTRASI MASUK</h1>
     <p>Silakan Lengkapi Data Sebelum Memasuki Area Hotel Indonesia Kempinski Jakarta</p>
@@ -166,110 +57,72 @@ button {
 
   <div class="form-body">
     <form onsubmit="sendData(); return false;">
-
-      <div class="field">
-        <label>Nama</label>
-        <input type="text" id="nama" required>
-      </div>
-
-      <div class="field">
-        <label>No Handphone</label>
-        <input id="phone" type="tel" required>
-      </div>
-
-      <div class="field">
-        <label>Nama Perusahaan / Vendor</label>
-        <input type="text" id="perusahaan" required>
-      </div>
-
-      <div class="field">
-        <label>Kategori</label>
+      <div class="field"><label>Nama</label><input id="nama" required></div>
+      <div class="field"><label>No Handphone</label><input id="phone" type="tel" required></div>
+      <div class="field"><label>Nama Perusahaan / Vendor</label><input id="perusahaan" required></div>
+      <div class="field"><label>Kategori</label>
         <select id="kategori" required>
           <option value="">Pilih</option>
-          <option>Kontraktor</option>
-          <option>Supplier</option>
-          <option>Visitor</option>
-          <option>Parttime</option>
+          <option>Kontraktor</option><option>Supplier</option>
+          <option>Visitor</option><option>Parttime</option>
         </select>
       </div>
-
-      <div class="field">
-        <label>Lokasi Kerja</label>
+      <div class="field"><label>Lokasi Kerja</label>
         <select id="lokasi" required>
           <option value="">Pilih Lokasi</option>
-          <option>Receiving</option>
-          <option>Purchasing</option>
-          <option>Grand Ball Room</option>
-          <option>Bali Room</option>
-          <option>Ramayana Terrace</option>
-          <option>Heritage 1</option>
-          <option>Heritage 2</option>
-          <option>Cendana + Eboni</option>
-          <option>Palapi + Jati</option>
-          <option>Damar + Angsana</option>
-          <option>Mahoni + Ulin</option>
-          <option>Business Center</option>
-          <option>Signature Restaurant</option>
-          <option>Paulaner Restaurant</option>
-          <option>Oku Restaurant</option>
-          <option>Executive Lounge</option>
-          <option>President Suite Room 832</option>
-          <option>Room</option>
+          <option>Receiving</option><option>Purchasing</option>
+          <option>Grand Ball Room</option><option>Bali Room</option>
+          <option>Ramayana Terrace</option><option>Heritage 1</option>
+          <option>Heritage 2</option><option>Cendana + Eboni</option>
+          <option>Palapi + Jati</option><option>Damar + Angsana</option>
+          <option>Mahoni + Ulin</option><option>Business Center</option>
+          <option>Signature Restaurant</option><option>Paulaner Restaurant</option>
+          <option>Oku Restaurant</option><option>Executive Lounge</option>
+          <option>President Suite Room 832</option><option>Room</option>
           <option>Lainnya</option>
         </select>
       </div>
-
-      <div class="field">
-        <label>Tujuan</label>
-        <textarea id="tujuan" required></textarea>
-      </div>
-
-      <div class="field">
-        <label>Nama Security</label>
-        <input type="text" id="security" required>
-      </div>
-
-      <div class="field">
-        <label>Nomor Pass / Rompi</label>
-        <input type="text" id="pass" required>
-      </div>
-
-      <div class="field">
-        <label>Tanggal & Jam Masuk</label>
-        <input type="text" id="datetime" readonly>
-      </div>
-
-     <button id="btnSubmit" type="submit">KIRIM VIA WHATSAPP</button>
+      <div class="field"><label>Tujuan</label><textarea id="tujuan" required></textarea></div>
+      <div class="field"><label>Nama Security</label><input id="security" required></div>
+      <div class="field"><label>Nomor Pass / Rompi</label><input id="pass" required></div>
+      <div class="field"><label>Tanggal & Jam Masuk</label><input id="datetime" readonly></div>
+      <button id="btnSubmit">KIRIM VIA WHATSAPP</button>
     </form>
   </div>
 
-  <div class="form-footer">
-    © REGISTRASI MASUK
-  </div>
-
+  <div class="form-footer">© REGISTRASI MASUK</div>
 </div>
-  
-<script>
-const WEBAPP_URL =
-"https://script.google.com/macros/s/AKfycbyvW7tRgTGBJH249C-VUMCdqtfjmBcayViSu8wUhB3RyPWOHrVbmPMza67hMNR2EDJ9Mw/exec";
 
+<!-- 🔒 FORM KHUSUS GOOGLE SHEET (MOBILE SAFE) -->
+<form id="gsForm"
+      method="POST"
+      target="hidden_iframe"
+      action="https://script.google.com/macros/s/AKfycbyvW7tRgTGBJH249C-VUMCdqtfjmBcayViSu8wUhB3RyPWOHrVbmPMza67hMNR2EDJ9Mw/exec">
+  <input name="nama">
+  <input name="phone">
+  <input name="perusahaan">
+  <input name="kategori">
+  <input name="lokasi">
+  <input name="tujuan">
+  <input name="security">
+  <input name="pass">
+  <input name="datetime">
+</form>
+<iframe name="hidden_iframe" style="display:none"></iframe>
+
+<script>
 let isSending = false;
 
 /* AUTO DATETIME */
 const now = new Date();
-datetime.value =
-  now.toLocaleDateString("id-ID") + " " +
-  now.toLocaleTimeString("id-ID", {
-    hour: "2-digit",
-    minute: "2-digit"
-  });
+datetime.value = now.toLocaleDateString("id-ID") + " " +
+  now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
 
 function sendData() {
   if (isSending) return;
   isSending = true;
   btnSubmit.disabled = true;
 
-  /* 1️⃣ SIAPKAN MESSAGE DULU */
   const message =
 `REGISTRASI MASUK
 
@@ -283,54 +136,29 @@ Nama Security: ${security.value}
 Nomor Pass/Rompi: ${pass.value}
 Tanggal & Jam Masuk: ${datetime.value}`;
 
-  /* 2️⃣ BUKA WHATSAPP (HARUS PERTAMA!) */
+  /* BUKA WHATSAPP */
   window.open(
     "https://wa.me/6281314414955?text=" + encodeURIComponent(message),
     "_blank"
   );
 
-  /* 3️⃣ KIRIM KE GOOGLE SHEET (BACKGROUND) */
-  const formData = new URLSearchParams();
-  formData.append("nama", nama.value);
-  formData.append("phone", phone.value);
-  formData.append("perusahaan", perusahaan.value);
-  formData.append("kategori", kategori.value);
-  formData.append("lokasi", lokasi.value);
-  formData.append("tujuan", tujuan.value);
-  formData.append("security", security.value);
-  formData.append("pass", pass.value);
-  formData.append("datetime", datetime.value);
+  /* KIRIM KE GOOGLE SHEET (ANTI GAGAL DI HP) */
+  const f = document.getElementById("gsForm");
+  f.nama.value = nama.value;
+  f.phone.value = phone.value;
+  f.perusahaan.value = perusahaan.value;
+  f.kategori.value = kategori.value;
+  f.lokasi.value = lokasi.value;
+  f.tujuan.value = tujuan.value;
+  f.security.value = security.value;
+  f.pass.value = pass.value;
+  f.datetime.value = datetime.value;
+  f.submit();
 
-  fetch(WEBAPP_URL, {
-    method: "POST",
-    body: formData,
-    mode: "no-cors"
-  });
-
-  /* 4️⃣ RESET */
   document.querySelector("form").reset();
-
-  setTimeout(() => {
-    isSending = false;
-    btnSubmit.disabled = false;
-  }, 1500);
+  setTimeout(() => { isSending = false; btnSubmit.disabled = false; }, 1500);
 }
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
