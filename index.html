@@ -269,41 +269,39 @@ function sendData() {
   isSending = true;
   btnSubmit.disabled = true;
 
-const formData = new URLSearchParams();
-formData.append("nama", nama.value);
-formData.append("phone", phone.value);
-formData.append("perusahaan", perusahaan.value);
-formData.append("kategori", kategori.value);
-formData.append("lokasi", lokasi.value);
-formData.append("tujuan", tujuan.value);
-formData.append("security", security.value);
-formData.append("pass", pass.value);
-formData.append("datetime", datetime.value);
+  const formData = new URLSearchParams();
+  formData.append("nama", nama.value);
+  formData.append("phone", phone.value);
+  formData.append("perusahaan", perusahaan.value);
+  formData.append("kategori", kategori.value);
+  formData.append("lokasi", lokasi.value);
+  formData.append("tujuan", tujuan.value);
+  formData.append("security", security.value);
+  formData.append("pass", pass.value);
+  formData.append("datetime", datetime.value);
 
-fetch(WEBAPP_URL, {
-  method: "POST",
-  body: formData
-});
+  fetch(WEBAPP_URL, {
+    method: "POST",
+    body: formData
+  });
 
-  /* ✅ LANGSUNG BUKA WHATSAPP (ANTI DELAY) */
   const message =
     "REGISTRASI MASUK%0A%0A" +
-    "Nama: " + data.nama + "%0A" +
-    "No Handphone: " + data.phone + "%0A" +
-    "Perusahaan/Vendor: " + data.perusahaan + "%0A" +
-    "Kategori: " + data.kategori + "%0A" +
-    "Lokasi Kerja: " + data.lokasi + "%0A" +
-    "Tujuan: " + data.tujuan + "%0A" +
-    "Nama Security: " + data.security + "%0A" +
-    "Nomor Pass/Rompi: " + data.pass + "%0A" +
-    "Tanggal & Jam Masuk: " + data.datetime;
+    "Nama: " + nama.value + "%0A" +
+    "No Handphone: " + phone.value + "%0A" +
+    "Perusahaan/Vendor: " + perusahaan.value + "%0A" +
+    "Kategori: " + kategori.value + "%0A" +
+    "Lokasi Kerja: " + lokasi.value + "%0A" +
+    "Tujuan: " + tujuan.value + "%0A" +
+    "Nama Security: " + security.value + "%0A" +
+    "Nomor Pass/Rompi: " + pass.value + "%0A" +
+    "Tanggal & Jam Masuk: " + datetime.value;
 
   window.open(
     "https://wa.me/6281314414955?text=" + message,
     "_blank"
   );
 
-  /* RESET FORM */
   document.querySelector("form").reset();
 
   setTimeout(() => {
@@ -311,11 +309,14 @@ fetch(WEBAPP_URL, {
     btnSubmit.disabled = false;
   }, 1500);
 }
+
+  
 </script>
 
 
 </body>
 </html>
+
 
 
 
