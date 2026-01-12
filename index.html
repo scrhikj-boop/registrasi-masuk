@@ -173,6 +173,11 @@ button {
       </div>
 
       <div class="field">
+        <label>No Handphone</label>
+        <input id="phone" type="tel" required>
+      </div>
+
+      <div class="field">
         <label>Nama Perusahaan / Vendor</label>
         <input type="text" id="perusahaan" required>
       </div>
@@ -266,6 +271,7 @@ function sendData() {
 
   const data = {
     nama: nama.value,
+    phone: phone.value,
     perusahaan: perusahaan.value,
     kategori: kategori.value,
     lokasi: lokasi.value,
@@ -286,6 +292,7 @@ function sendData() {
   const message =
     "REGISTRASI MASUK%0A%0A" +
     "Nama: " + data.nama + "%0A" +
+    "No Handphone: " + data.phone + "%0A" +
     "Perusahaan/Vendor: " + data.perusahaan + "%0A" +
     "Kategori: " + data.kategori + "%0A" +
     "Lokasi Kerja: " + data.lokasi + "%0A" +
@@ -312,6 +319,7 @@ function sendData() {
 
 </body>
 </html>
+
 
 
 
